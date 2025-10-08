@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>january.live — Home</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body id="index">
+     <div id="site-overlay" class="site-overlay" onclick="(function(el){localStorage.setItem('visited_syxxclub','1');el.style.display='none';})(this)">
+             <span class="overlay-text">click me</span>
+     </div>
+
+    <!-- Video background element -->
+            <video id="bg-video" class="bg-video" autoplay loop muted playsinline>
+                <source src="assets/background.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <a class="skip-link" href="#main">Skip to content</a>
+
+
+            <script>
+            // Overlay initialization (runs once) — no audio
+            (function() {
+              const overlay = document.getElementById('site-overlay');
+              if (!overlay) return;
+              if (localStorage.getItem('visited_syxxclub')) {
+                overlay.style.display = 'none';
+              } else {
+                overlay.style.display = 'flex';
+                overlay.addEventListener('click', function() {
+                  overlay.style.display = 'none';
+                  localStorage.setItem('visited_syxxclub', '1');
+                }, { once: true });
+              }
+            })();
+            </script>
+
+        <script>
+            // Add id to body for home page specific styling
+            document.body.id = 'index';
+        </script>
+
+    <header class="site-header">
+        <nav class="nav" aria-label="Primary navigation">
+            <div class="nav-inner">
+                <a class="brand" href="index.html">january.live</a>
+                <ul class="nav-list">
+                    <li><a class="nav-link active" href="index.html">Home</a></li>
+                    <li><a class="nav-link" href="about.html">About</a></li>
+                    <li><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main id="main" class="main">
+        <section id="home" class="hero" aria-label="Home">
+            <div class="info-box" role="region" aria-labelledby="info-title">
+                <h1 id="info-title">january.live</h1>
+                <p>january.live is under construction</p>
+                <p><a class="primary-btn" href="about.html">About</a></p>
+            </div>
+
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">© january.live</div>
+    </footer>
+
+</body>
+</html>
