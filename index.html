@@ -1,73 +1,411 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>january.live — Home</title>
-    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>January</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #2a2a2a;
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: #1e1e1e;
+            padding: 20px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            color: #87ceeb;
+            font-size: 28px;
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(90deg, #87ceeb, #b6e6ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: #87ceeb;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #87ceeb;
+            transition: width 0.3s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 20px;
+        }
+
+        .info-box {
+            background: linear-gradient(145deg, #333333, #2a2a2a);
+            padding: 50px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 
+                        0 0 0 1px rgba(135, 206, 235, 0.1);
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .info-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #87ceeb, #b6e6ff);
+        }
+
+        .info-box h1 {
+            color: #ffffff;
+            margin-bottom: 20px;
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+
+        .info-box .accent {
+            color: #87ceeb;
+        }
+
+        .info-box p {
+            color: #b0b0b0;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .features {
+            display: flex;
+            justify-content: space-around;
+            margin: 30px 0;
+        }
+
+        .feature {
+            text-align: center;
+            padding: 15px;
+        }
+
+        .feature i {
+            font-size: 2rem;
+            color: #87ceeb;
+            margin-bottom: 10px;
+        }
+
+        .feature h3 {
+            color: #ffffff;
+            margin-bottom: 8px;
+            font-size: 1.2rem;
+        }
+
+        .feature p {
+            font-size: 0.9rem;
+            margin-bottom: 0;
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #87ceeb, #5bb5e8);
+            color: #1e1e1e;
+            padding: 14px 32px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(135, 206, 235, 0.3);
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(135, 206, 235, 0.5);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: #87ceeb;
+            border: 2px solid #87ceeb;
+            margin-left: 15px;
+        }
+
+        .btn-outline:hover {
+            background: rgba(135, 206, 235, 0.1);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1e1e1e;
+            padding: 40px 0 20px;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .footer-column h3 {
+            color: #87ceeb;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: #87ceeb;
+        }
+
+        .footer-column p {
+            color: #b0b0b0;
+            margin-bottom: 15px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: #b0b0b0;
+            text-decoration: none;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-links a:hover {
+            color: #87ceeb;
+        }
+
+        .footer-links i {
+            font-size: 0.9rem;
+            color: #87ceeb;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background-color: #2a2a2a;
+            border-radius: 50%;
+            color: #87ceeb;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background-color: #87ceeb;
+            color: #1e1e1e;
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            nav ul {
+                gap: 15px;
+            }
+            
+            .info-box {
+                padding: 30px 20px;
+            }
+            
+            .info-box h1 {
+                font-size: 2rem;
+            }
+            
+            .features {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                gap: 30px;
+            }
+            
+            .btn-container {
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .btn-outline {
+                margin-left: 0;
+            }
+        }
+    </style>
 </head>
-<body id="index">
-     <div id="site-overlay" class="site-overlay" onclick="(function(el){localStorage.setItem('visited_syxxclub','1');el.style.display='none';})(this)">
-             <span class="overlay-text">click me</span>
-     </div>
-
-    <!-- Video background element -->
-            <video id="bg-video" class="bg-video" autoplay loop muted playsinline>
-                <source src="assets/background.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-            <a class="skip-link" href="#main">Skip to content</a>
-
-
-            <script>
-            // Overlay initialization (runs once) — no audio
-            (function() {
-              const overlay = document.getElementById('site-overlay');
-              if (!overlay) return;
-              if (localStorage.getItem('visited_syxxclub')) {
-                overlay.style.display = 'none';
-              } else {
-                overlay.style.display = 'flex';
-                overlay.addEventListener('click', function() {
-                  overlay.style.display = 'none';
-                  localStorage.setItem('visited_syxxclub', '1');
-                }, { once: true });
-              }
-            })();
-            </script>
-
-        <script>
-            // Add id to body for home page specific styling
-            document.body.id = 'index';
-        </script>
-
-    <header class="site-header">
-        <nav class="nav" aria-label="Primary navigation">
-            <div class="nav-inner">
-                <a class="brand" href="index.html">january.live</a>
-                <ul class="nav-list">
-                    <li><a class="nav-link active" href="index.html">Home</a></li>
-                    <li><a class="nav-link" href="about.html">About</a></li>
-                    <li><a class="nav-link" href="contact.html">Contact</a></li>
-                </ul>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-cloud logo-icon"></i>
+                    <div class="logo-text">January</div>
+                </div>
+                <nav>
+                    <ul>
+                     <!--<li><a href="#">Home</a></li> -->
+                   <!-- <li><a href="#">Services</a></li>
+                        <li><a href="#">Portfolio</a></li> 
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Contact</a></li> -->
+                    </ul>
+                </nav>
             </div>
-        </nav>
+        </div>
     </header>
 
-    <main id="main" class="main">
-        <section id="home" class="hero" aria-label="Home">
-            <div class="info-box" role="region" aria-labelledby="info-title">
-                <h1 id="info-title">january.live</h1>
-                <p>january.live is under construction</p>
-                <p><a class="primary-btn" href="about.html">About</a></p>
+    <main class="main-content">
+        <div class="container">
+            <div class="info-box">
+                <h1>Welcome to <span class="accent">January</span></h1>
+                <p>January is currently a work in progress. Find out more in the community discord.</p>
+                
+                <!--<div class="features">
+                    <div class="feature">
+                        <i class="fas fa-palette"></i>
+                        <h3>Modern Design</h3>
+                        <p>Clean and contemporary aesthetics</p>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-mobile-alt"></i>
+                        <h3>Responsive</h3>
+                        <p>Perfect on all devices</p>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-bolt"></i>
+                        <h3>Fast</h3>
+                        <p>Optimized for performance</p>
+                    </div>
+                </div> -->
+            
+                <div class="btn-container">
+                    <a href="https://discord.gg/HCsmkKHcay" class="btn">Join the community discord</a>
+                   <!-- <a href="#" class="btn btn-outline">Learn More</a> -->
+                </div>
             </div>
-
-        </section>
+        </div>
     </main>
 
-    <footer class="site-footer">
-        <div class="container">© january.live</div>
+    <footer>
+            
+            <div class="copyright">
+                <p>&copy; 2025 January.live. All rights reserved.</p>
+            </div>
+        </div>
     </footer>
-
 </body>
 </html>
